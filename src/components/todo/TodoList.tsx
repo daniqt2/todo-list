@@ -18,8 +18,6 @@ export const TodoList: React.FC<IPropsTodoList> = ({
   const handleUpdate = (idx: number, done: boolean) =>
     updateTodo({ id: idx, done });
 
-  const hasCompleted = items.some((task) => task.done);
-
   const empty = useCallback(
     () => (
       <div className="w-full flex">
