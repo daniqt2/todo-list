@@ -4,6 +4,7 @@ import {
   deleteCompleted,
   deleteTodo,
   getTodoList,
+  updateTodo,
 } from "../../service/todo.service";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
@@ -20,19 +21,23 @@ export const TodoContainer = () => {
     setItems(todos);
   }, []);
 
+  const setNewItems = <T,>(func: (data: T) => ITodo[], params: T) =>
+    setItems([...func(params)]);
+
   const handleAdd = useCallback((newTodo: string) => {
-    let newTodos = addTodo(newTodo);
-    setItems([...newTodos]);
+    setNewItems<string>(addTodo, newTodo);
   }, []);
 
   const handleDeleteCompleted = useCallback(() => {
-    let newTodos = deleteCompleted();
-    setItems([...newTodos]);
+    setNewItems(deleteCompleted, undefined);
   }, []);
 
   const handleDelete = useCallback((id: number) => {
-    let newTodos = deleteTodo(id);
-    setItems([...newTodos]);
+    setNewItems<number>(deleteTodo, id);
+  }, []);
+
+  const handleUpdate = useCallback((idx: number, done: boolean) => {
+    setNewItems<{ id: number; done: boolean }>(updateTodo, { id: idx, done });
   }, []);
 
   const handleFilter = useCallback((val: TFilter) => setFilter(val), []);
@@ -49,6 +54,7 @@ export const TodoContainer = () => {
       <Filters handleFilter={handleFilter} />
       <TodoList
         items={finalTodos}
+        handleUpdate={handleUpdate}
         handleDelete={handleDelete}
         handleDeleteCompleted={handleDeleteCompleted}
       />

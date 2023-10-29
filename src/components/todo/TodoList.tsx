@@ -3,21 +3,19 @@ import React, { useCallback } from "react";
 import Button from "@atlaskit/button";
 import { ITodo } from "../../models/todo.interface";
 import { TodoCard } from "../base/TodoCard";
-import { updateTodo } from "../../service/todo.service";
 
 interface IPropsTodoList {
   items: ITodo[];
   handleDelete: (id: number) => void;
   handleDeleteCompleted: () => void;
+  handleUpdate: (idx: number, done: boolean) => void;
 }
 export const TodoList: React.FC<IPropsTodoList> = ({
   items,
   handleDelete,
   handleDeleteCompleted,
+  handleUpdate,
 }) => {
-  const handleUpdate = (idx: number, done: boolean) =>
-    updateTodo({ id: idx, done });
-
   const empty = useCallback(
     () => (
       <div className="w-full flex">

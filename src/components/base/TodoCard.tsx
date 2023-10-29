@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Button from "@atlaskit/button";
 import { Checkbox } from "@atlaskit/checkbox";
@@ -16,6 +16,10 @@ export const TodoCard: React.FC<IPropsTodoCard> = ({
   handleComplete,
 }) => {
   const [isDone, setIsDone] = useState(done);
+
+  useEffect(() => {
+    setIsDone(done);
+  }, [done]);
 
   const toggle = () => {
     handleComplete(!isDone);
