@@ -1,8 +1,7 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 
 import Button from "@atlaskit/button";
 import { Checkbox } from "@atlaskit/checkbox";
-import __noop from "@atlaskit/ds-lib/noop";
 
 interface IPropsTodoCard {
   description: string;
@@ -21,7 +20,6 @@ export const TodoCard: React.FC<IPropsTodoCard> = ({
   const toggle = () => {
     handleComplete(!isDone);
     setIsDone((prev) => !prev);
-    console.log(isDone);
   };
 
   return (

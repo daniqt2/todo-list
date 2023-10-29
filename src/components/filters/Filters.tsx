@@ -1,6 +1,5 @@
-import React, { SyntheticEvent, useCallback } from "react";
+import React, { SyntheticEvent } from "react";
 
-import { Box } from "@atlaskit/primitives";
 import { RadioGroup } from "@atlaskit/radio";
 
 export type TFilter = "all" | "completed" | "not-completed";
@@ -20,9 +19,8 @@ export const Filters: React.FC<IPropsFilters> = ({ handleFilter }) => {
     { value: "not-completed", label: "No completadas" },
   ];
 
-  const onChange = useCallback((event: SyntheticEvent<HTMLInputElement>) => {
+  const onChange = (event: SyntheticEvent<HTMLInputElement>) =>
     handleFilter(event.currentTarget.value as TFilter);
-  }, []);
 
   return (
     <div className="my-10 bg-light p-4 w-48 rounded-lg bg-opacity-60">

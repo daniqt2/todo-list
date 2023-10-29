@@ -26,7 +26,6 @@ export const deleteTodo = (id: number) => {
 export const deleteCompleted = () => {
   const todoList = getTodoList();
   const filtered = todoList.filter((t) => !t.done);
-  console.log(filtered);
   setTodoList(filtered);
   return filtered;
 };
